@@ -29,7 +29,6 @@ let Hero = () => {
             src="images/card-counter-poster.jpg"
             alt=""
           />
-          
           <button className="round_btn text-white bg-purple-600">
             Read More
           </button>

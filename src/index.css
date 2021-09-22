@@ -25,7 +25,7 @@
 
 @layer utilities{
     .round_btn{
-        @apply cursor-pointer text-sm sm:text-base lg:text-lg shadow-xl rounded-full px-3 py-2 font-bold;
+        @apply cursor-pointer text-sm sm:text-base lg:text-lg shadow-xl rounded-full px-3 py-2 font-bold hover:bg-purple-700 active:bg-purple-800;
     }
 
     .pg_btn{

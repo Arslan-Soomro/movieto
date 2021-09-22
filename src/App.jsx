@@ -7,7 +7,6 @@ import Footer from "./components/Footer";
 function App() {
   return (
   <div className="App h-full">
-    
     <Hero />
     <MovieGallery />
     <Footer />
