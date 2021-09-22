@@ -22,3 +22,13 @@
         @apply w-full h-full bg-gray-50;
     }
 }
+
+@layer utilities{
+    .round_btn{
+        @apply cursor-pointer text-sm sm:text-base lg:text-lg shadow-xl rounded-full px-3 py-2 font-bold;
+    }
+
+    .pg_btn{
+        @apply border-gray-300 hover:bg-gray-50 active:bg-gray-100 px-4 py-2;
+    }
+}
