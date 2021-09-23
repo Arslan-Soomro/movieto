@@ -31,6 +31,10 @@
         @apply cursor-pointer text-sm sm:text-base lg:text-lg shadow-xl rounded-full px-3 py-2 font-bold hover:bg-purple-700 active:bg-purple-800;
     }
 
+    .purp_outline_btn{
+        @apply border border-purple-600 text-purple-700 hover:bg-purple-600 hover:text-white transition-colors text-sm xs:text-base px-2 py-1 rounded font-bold;
+    }
+
     .pg_btn{
         @apply border-gray-300 hover:bg-gray-50 active:bg-gray-100 px-4 py-2;
     }

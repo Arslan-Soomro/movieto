@@ -1,11 +1,11 @@
 import React from 'react';
 import Home from "./pages/Home";
-import Signup from "./pages/Signup";
+import Register from "./pages/Register";
 
 function App() {
   return (
   <div className="App h-full">
-    <Signup />
+    <Register />
   </div>
   )
 }
