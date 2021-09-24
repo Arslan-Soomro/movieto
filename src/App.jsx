@@ -1,13 +1,15 @@
 import React from 'react';
-import Home from "./pages/Home";
-import Register from "./pages/Register";
+import Home from './pages/Home';
+import RTemplate from "./pages/RTemplate";
 import Navbar from "./components/Navbar";
+import Signup from './components/Signup';
+import Login from './components/Login'
 
 function App() {
   return (
   <div className="App h-full">
     <Navbar />
-    <Home />
+    <RTemplate><Signup /></RTemplate>
   </div>
   )
 }

@@ -24,7 +24,10 @@ let Login = () => {
         >
           Login
         </button>
-
+      <p className="text-sm xs:text-base text-gray-700 mt-2">
+        Don't have an account !{" "}
+        <a className="text-purple-600 font-bold cursor-pointer">Signup</a>
+      </p>
     </form>
   );
 };
