@@ -8,7 +8,6 @@ let Register = () => {
 
     return (
         <section className="font-poppins container h-full flex items-center justify-between">
-            <Navbar />
             <div className="flex-grow sm:flex-grow-0 sm:w-9/12 flex justify-center">
                 {signup ? <Signup /> : <Login />}
             </div>

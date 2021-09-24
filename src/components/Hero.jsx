@@ -4,7 +4,6 @@ import NavBar from "./Navbar";
 let Hero = () => {
   return (
     <section className="container relative p-4 h-full">
-      <NavBar />
       <div className="flex flex-col-reverse sm:flex-row justify-around sm:justify-between items-center text-center h-full font-poppins">
         <div className="sm:w-1/2 sm:text-left sm:ml-10">
           <p className="text-gray-400 sm:text-xl lg:text-2xl ">Help us find you the</p>
