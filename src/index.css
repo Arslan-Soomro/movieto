@@ -46,4 +46,9 @@
     .purp_outline_input{
         @apply bg-white border border-purple-600 text-purple-800 transition-colors text-sm rounded-md py-2 px-3;
     }
+
+    .pagebar_btn_active{
+        @apply  border-purple-600 border bg-purple-200;
+    }
 }
+

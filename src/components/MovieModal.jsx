@@ -1,0 +1,39 @@
+import React from 'react';
+
+const getMovieData = async (url) => {
+    const host = 'http://localhost:3838/';
+    const fullUrl = `${host}movie?link=${url}`;
+    const res = await fetch(fullUrl);
+    const jsonData = await res.json();
+
+    console.log(jsonData);
+
+    return jsonData;
+}
+
+const MovieModal = ({modalLink, exitAction}) => {
+
+    const modalData = {};
+
+    return(
+        <div className="w-full h-full fixed top-0 left-0 z-50 bg-[#00000055] flex justify-center items-center py-2">
+            <div className="relative bg-white border-2 border-purple-700 flex flex-col md:flex-row items-center w-11/12 max-w-4xl px-6 py-4 md:py-6 rounded container">
+                <img src="images/close.svg" className="w-4 h-4 absolute top-4 right-4 cursor-pointer" onClick={() => exitAction(null)} />
+                <div className="max-w-[150px] md:max-w-[201px] w-96 z-10 h-full">
+                    <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg" className="rounded shadow-lg w-full h-auto" />
+                </div>
+                <div className="py-3 xs:px-8 font-poppins text-center sm:text-left">
+                    <h2 className="font-bold text-2xl text-gray-800 md:text-4xl">{modalData.title}</h2>
+                    <p className="text-gray-400 sm:text-lg">Life's too short to be a background character.</p>
+                    <p className="text-gray-800 sm:text-lg my-2">A bank teller called Guy realizes he is a background character in an open world video game called Free City that will soon go offline.</p>
+                    <p className="font-bold">Score: <span>79%</span></p>
+                    <p className="text-gray-400">Action, Adventure, Comedy</p>
+                    <p className="text-gray-400">2001 july, 4</p>
+                    <button className="p-2 mt-2 border border-purple-600 rounded text-purple-600">Add to Watchlist</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default MovieModal;
