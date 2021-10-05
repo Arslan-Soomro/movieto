@@ -17,7 +17,7 @@ const MovieModal = ({modalLink, exitAction}) => {
     
     useEffect(() => {
         const host = 'http://localhost:3838/';
-        const fullUrl = `${host}movie?link=${modalLink}`;
+        const fullUrl = `${host}tmdb?link=${modalLink}`;
         fetch(fullUrl)
          .then(res => res.json())
          .then(data => setModalData(data));
@@ -42,7 +42,7 @@ const MovieModal = ({modalLink, exitAction}) => {
                     <h2 className="font-bold text-2xl text-gray-800 md:text-4xl">{modalData.title}</h2>
                     <p className="text-gray-400 sm:text-lg">{modalData.tagline}</p>
                     <p className="text-gray-800 sm:text-lg my-2">{modalData.disc}</p>
-                    <p className="font-bold">Score: <span>79%</span></p>
+                    <p className="font-bold">Score: 101%</p>
                     <p className="text-gray-400">{modalData.genre}</p>
                     <p className="text-gray-400">2001 july, 4</p>
                     <button className="p-2 mt-2 border border-purple-600 rounded text-purple-600">Add to Watchlist</button>

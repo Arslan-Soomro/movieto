@@ -11,8 +11,9 @@ function App() {
 
   return (
   <div className="App h-full">
-    {/*
     <Navbar />
+    {/*
+    
     <RTemplate><Signup /></RTemplate>
     */}
 
