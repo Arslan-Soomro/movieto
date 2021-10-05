@@ -50,5 +50,27 @@
     .pagebar_btn_active{
         @apply  border-purple-600 border bg-purple-200;
     }
+
+    .spinner {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .spinner::after {
+        content: "";
+        width: 50px;
+        height: 50px;
+        border: 6px solid transparent;
+        border-top-color: #7C3AED;
+        border-right-color: #7C3AED;
+        border-radius: 50%;
+        animation: loading 0.8s infinite linear;
+    }
+    
+    @keyframes loading {
+        to {
+            transform: rotate(1turn);
+        }
+    }
 }
 
