@@ -12,7 +12,7 @@ const getMovieData = async (url) => {
 }
 
 /*
-With the help of api
+With the help of api, fetches the data of a specific movie by giving a link
 */
 
 const MovieModal = ({modalLink, exitAction}) => {
@@ -24,7 +24,7 @@ const MovieModal = ({modalLink, exitAction}) => {
         const fullUrl = `${host}tmdb?link=${modalLink}`;
         fetch(fullUrl)
          .then(res => res.json())
-         .then(data => setModalData(data));
+         .then(data => {setModalData(data);console.log(data)});
     }, [])
 
     if(!modalData){
@@ -45,7 +45,7 @@ const MovieModal = ({modalLink, exitAction}) => {
                         <h2 className="font-bold text-md xs:text-lg text-gray-800 md:text-4xl inline">{modalData.title}</h2>
                         <p className="text-gray-400 text-sm sm:text-lg">{modalData.tagline}</p>
                         <p className="text-gray-800 text-sm sm:text-lg my-2 max-h-44 md:max-h-50 overflow-y-auto">{modalData.disc}</p>
-                        <p className="font-bold text-sm xs:text-base">Score: 101%</p>
+                        <p className="font-bold text-sm xs:text-base">Rating: {modalData.rating}%</p>
                         <p className="text-gray-400 text-sm xs:text-base">{modalData.genre}</p>
                         <p className="text-gray-400 text-sm xs:text-base">2001 july, 4</p>
                         <button className="p-2 mt-2 border text-sm xs:text-base border-purple-600 rounded text-purple-700 hover:bg-purple-600 hover:text-white active:bg-purple-700">Add to Watchlist</button>
