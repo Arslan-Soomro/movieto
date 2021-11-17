@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./Navbar";
 
-let Hero = () => {
+let Hero = (props) => {
   return (
     <section className="container relative p-4 h-full">
       <div className="flex flex-col-reverse sm:flex-row justify-around sm:justify-between items-center text-center h-full font-poppins">
@@ -21,11 +21,11 @@ let Hero = () => {
         <div className="flex flex-col items-center sm:w-1/2 lg:w-2/5">
           <p className="text-gray-400 sm:text-lg">You may like</p>
           <h3 className="font-bold text-lg xs:text-xl sm:text-2xl lg:text-3xl text-purple-600">
-            The Card Counter
+            {props.movieSpecs.title}
           </h3>
           <img
             className="w-1/2 xs:w-2/5 sm:w-1/2 my-3 sm:my-6 mx-auto rounded shadow-lg"
-            src="images/card-counter-poster.jpg"
+            src={props.movieSpecs.imgSrc}
             alt=""
           />
           <button className="round_btn text-white bg-purple-600">

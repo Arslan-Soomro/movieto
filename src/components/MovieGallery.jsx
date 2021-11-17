@@ -3,12 +3,19 @@ import MovieCard from "./MovieCard";
 import PageBar from "./PageBar";
 import MovieModal from "./MovieModal";
 
+/*
+Given some movie data, MovieGallery translates that data onto movieCards.
+Other variables manage what part of data is to be displayed and how.
+*/
+
+
 let MovieGallery = ({data}) => {
 
-    const [toDisplayData, setToDisplayData] = useState([]);
-    const [movieModalData, setMovieModalData] = useState(null);//Provide a link to fetch movie contents and null to fetch no movies
-    const mContainerRef = useRef();//Ref To Help Scroll To Topcon
+    const [toDisplayData, setToDisplayData] = useState([]);//Data That is displayed on current page
+    const [movieModalData, setMovieModalData] = useState(null);//Provide a link to fetch (specific) movie contents and null to fetch no movies, if no movies than modal is hidden
+    const mContainerRef = useRef();//Ref To Help Scroll To Top
 
+    //For Debugging Purposes
     useEffect(() => {
         console.log(movieModalData);
     }, [movieModalData]);

@@ -11,6 +11,10 @@ const getMovieData = async (url) => {
     return jsonData;
 }
 
+/*
+With the help of api
+*/
+
 const MovieModal = ({modalLink, exitAction}) => {
 
     const [modalData, setModalData] = useState(null);
