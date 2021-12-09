@@ -2,6 +2,8 @@ import React from "react";
 import NavBar from "./Navbar";
 
 let Hero = (props) => {
+  //TODO make the random movie be fetched from the api
+
   return (
     <section className="container relative p-4 h-full">
       <div className="flex flex-col-reverse sm:flex-row justify-around sm:justify-between items-center text-center h-full font-poppins">
