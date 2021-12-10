@@ -1,35 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
 /*Needs Work Specially with looks*/
-let PageBar = ({maximiumPages, minimumItems, items, setItems}) => {
+let PageBar = ({setCurPage, totalPages}) => {
 
-    const btnArray = [];
-    let totalPages = maximiumPages;
-    let itemsPerPage = minimumItems;
-    let itemsLen = items.length;
-    let itemsTD = []; //Items to display
+    const btnArray = []; //Contains the buttons for total pages
     const [currentPage, setCurrentPage] = useState(1);
     const pageBtnsRef = useRef();
-    
-    //does necessary initialization of components
-    useEffect(() => {
-        if(itemsLen/totalPages >= itemsPerPage){
-            itemsPerPage = parseInt(itemsLen/totalPages);
-        }else{
-            totalPages = parseInt(itemsLen/itemsPerPage);
-        }
-    }, [])
 
-    //Decides Which Items To Display On Pages
     useEffect(() => {
-        //Set To Empty Array
-        itemsTD = [];
 
-        //Choose The Right Elements Accourding To Current Page
-        for(let i = ((currentPage-1)*(itemsPerPage)); i < (currentPage*itemsPerPage); i++){
-            itemsTD.push(items[i]);
-        }
-        
         //Highlight the selected page btn
         Array.from(pageBtnsRef.current.children).forEach((el, i) => {
             if(currentPage === i+1){
@@ -37,10 +16,10 @@ let PageBar = ({maximiumPages, minimumItems, items, setItems}) => {
             }else{
                 el.classList.remove('pagebar_btn_active');
             }
-        })
+        });
 
-        //Set Items To Newly Selected Items
-        setItems(itemsTD);
+        setCurPage(currentPage);
+
     }, [currentPage]);
 
     const btnClickHandler = (e) => {
@@ -78,6 +57,7 @@ let PageBar = ({maximiumPages, minimumItems, items, setItems}) => {
             
             <div className="hidden xs:block" ref={pageBtnsRef}>
                 {btnArray}
+                {console.log(totalPages)}
             </div>
             
             <button className="pg_btn w-22 rounded-r-lg" onClick={nextClickHandler}>Next</button>

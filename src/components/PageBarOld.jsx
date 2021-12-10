@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 /*Needs Work Specially with looks*/
 let PageBar = ({maximiumPages, minimumItems, items, setItems}) => {
 
-    const btnArray = []; //Contains the buttons for total pages
+    const btnArray = [];
     let totalPages = maximiumPages;
     let itemsPerPage = minimumItems;
     let itemsLen = items.length;
