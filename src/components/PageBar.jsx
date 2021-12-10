@@ -57,7 +57,6 @@ let PageBar = ({setCurPage, totalPages}) => {
             
             <div className="hidden xs:block" ref={pageBtnsRef}>
                 {btnArray}
-                {console.log(totalPages)}
             </div>
             
             <button className="pg_btn w-22 rounded-r-lg" onClick={nextClickHandler}>Next</button>

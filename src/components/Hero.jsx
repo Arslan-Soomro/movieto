@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./Navbar";
-import { API_URL } from '../global';
+import { API_URL } from '../utils/global';
+import { cutToLength } from '../utils/utils';
 
 let Hero = () => {
-  //TODO make the random movie be fetched from the api
 
   const [movieSpecs, setMovieSpecs] = useState({});
  
@@ -32,11 +32,11 @@ let Hero = () => {
         <div className="flex flex-col items-center sm:w-1/2 lg:w-2/5">
           <p className="text-gray-400 sm:text-lg">You may like</p>
           <h3 className="font-bold text-lg xs:text-xl sm:text-2xl lg:text-3xl text-purple-600">
-            {movieSpecs.name}
+            {movieSpecs.name ? cutToLength(movieSpecs.name, 25) : 'Loading'}
           </h3>
           <img
             className="w-1/2 xs:w-2/5 sm:w-1/2 my-3 sm:my-6 mx-auto rounded shadow-lg"
-            src={movieSpecs.img_url}
+            src={movieSpecs.img_url || 'images/hero-img-load.jpg'}
             alt=""
           />
           <button className="round_btn text-white bg-purple-600">

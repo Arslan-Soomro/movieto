@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Hero from '../components/Hero';
 import MovieGalleryFetch from "../components/MovieGalleryFetch";
 import Footer from "../components/Footer";
-import { API_URL } from '../global';
 //import movieData from '../scripts/movieData.json';
 
 //TODO right proper description
+
 /*
 Home returns a section which contains hero, moviegallery and footer components.
 The MovieGallery component recives moviedata as data param and 20 as itemsPerPage.
