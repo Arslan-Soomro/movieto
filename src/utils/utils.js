@@ -1,4 +1,5 @@
-import { API_URL } from "./global";
+import { API_URL, TOKEN_NAME } from "./global";
+import { useContext } from "react";
 
 export const cutToLength = (str, len) => {
     if(str.length > len){
@@ -37,4 +38,8 @@ export const isValidToken = async (token) => {
         }
     }
     return false;
+}
+
+export const removeToken = () => {
+    window.localStorage.removeItem(TOKEN_NAME);
 }

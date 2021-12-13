@@ -1,12 +1,31 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { loginUser } from "../utils/utils";
 import { TOKEN_NAME } from "../utils/global";
+import { useNavigate } from "react-router-dom";
+import MsgBox from "./MsgBox";
 
-let Login = () => {
+let Login = (props) => {
 
   //TODO create a global token state, that changes thing when updated, probably at app
-  let usernameRef = useRef();
-  let passwordRef = useRef();
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const navigate = useNavigate();
+
+  const [ validationMsg, setValidationMsg ] = useState(null);
+
+  const loginClickHandler = async () => {
+    //TODO incase we don't get a token, display the returned message
+            
+    const response = await loginUser(usernameRef.current.value, passwordRef.current.value);
+    console.log(response);
+    if(response.data){
+      window.localStorage.setItem(TOKEN_NAME, response.data.token);
+      navigate('/');
+    }else{
+      setValidationMsg(response.message);
+    }
+
+  }
 
   return (
     <form className="flex flex-col w-max gap-4 py-4 px-2" onClick={(e) => e.preventDefault()}>
@@ -27,21 +46,21 @@ let Login = () => {
         className="purp_input"
         ref={passwordRef}
       />
+      
       <button
           type="submit"
           className="purp_outline_btn"
-          onClick={ async () => {
-            //TODO create a seprate function for this
-            //TODO also on succesfully getting the token we must navigate to home page or wish list
-            //TODO incase we don't get a token, display the returned message
-            const response = await loginUser(usernameRef.current.value, passwordRef.current.value);
-            if(response.data){
-              window.localStorage.setItem(TOKEN_NAME, response.data.token);
-            }
-          }}
+          onClick={loginClickHandler}
         >
           Login
-        </button>
+      </button>
+
+      {validationMsg ?
+        <MsgBox type="error">{validationMsg}</MsgBox>
+        :
+        null
+      }
+
       <p className="text-sm xs:text-base text-gray-700 mt-2">
         Don't have an account !{" "}
         <a className="text-purple-600 font-bold cursor-pointer">Signup</a>
