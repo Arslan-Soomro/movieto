@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../utils/contexts";
 import { Link } from 'react-router-dom';
 
 let Navbar = () => {
+
+  const user = useContext(UserContext);
+
   return (
     <div className="absolute z-10 top-2 xs:top-4 w-full">
       <div className="container px-3 sm:px-10 font-poppins flex items-center justify-between md:justify-start">

@@ -32,7 +32,7 @@
     }
 
     .purp_outline_btn{
-        @apply border border-purple-600 text-purple-700 hover:bg-purple-600 hover:text-white transition-colors text-sm xs:text-base px-2 py-1 rounded font-bold;
+        @apply border border-purple-600 text-purple-700 hover:bg-purple-600 active:bg-purple-700 hover:text-white transition-colors text-sm xs:text-base px-2 py-1 rounded font-bold;
     }
 
     .pg_btn{
