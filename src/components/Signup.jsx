@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/global";
+import { postTo } from "../utils/utils";
 import MsgBox from "./MsgBox";
 
 let Signup = () => {
@@ -15,24 +16,15 @@ let Signup = () => {
   const confirmPassRef = useRef();
 
   const signupUser = async (userDataforSignup) => {
-    
-    //TODO separate this function into utils
 
     //A Basic validation for confirm password because server doesn't check for confirm passwrod field
     if(userDataforSignup.confirmPass && userDataforSignup.password){
       if(userDataforSignup.confirmPass === userDataforSignup.password){
-        const response = await fetch(`${API_URL}/user/signup`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-            body: JSON.stringify(userDataforSignup)
-          });
 
-          const signupUserdata = await response.json();
+        const signupUserData = await postTo('/user/signup', userDataforSignup, true);
 
-        setValidationMsg(signupUserdata.message);
-        if(response.status == 201){
+        setValidationMsg(signupUserData.message);
+        if(signupUserData.status == 201){
           navigate("/login");
         }
 

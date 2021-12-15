@@ -9,7 +9,7 @@ Other variables manage what part of data is to be displayed and how.
 */
 
 
-const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClickHandler}) => {
+const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClickHandler, modalMsgText}) => {
 
     const [movieModalData, setMovieModalData] = useState(null);//Provide a link to fetch (specific) movie contents and null to fetch no movies, if no movies than modal is hidden
     const mContainerRef = useRef();//Ref To Help Scroll To Top
@@ -28,7 +28,7 @@ const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClick
     return (
         <section className="py-4 px-2" ref={mContainerRef}>
             {/* Shows A Specific Movie's Data if Data is Available */}
-            {movieModalData ? <MovieModal exitAction={() => setMovieModalData(null)} modalMovData={movieModalData} btnText={modalBtnText} btnClickHandler={modalBtnClickHandler} /> : null}
+            {movieModalData ? <MovieModal exitAction={() => setMovieModalData(null)} modalMovData={movieModalData} btnText={modalBtnText} btnClickHandler={modalBtnClickHandler} msgText={modalMsgText} /> : null}
             
             {/* Maps Available Movies to Movie Cards and then shows them collectively */}
             <div className="container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-items-center gap-3 p-1 xs:p-4">

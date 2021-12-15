@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import MovieGallery from "./MovieGallery";
 import { UserContext } from "../utils/contexts";
 import { API_URL, TOKEN_NAME } from "../utils/global";
+import { postTo } from "../utils/utils";
 
 const Watchlist = () => {
 
@@ -9,49 +10,23 @@ const Watchlist = () => {
     
     //An empty array is better than a null value because then using .map like functions wouldn't produce an error.
     const [watchList, setWatchlistData] = useState([]);
+    const [modalMsg, setModalMsg] = useState("");
 
     useEffect(async () => {    
-        //TODO cleanup, add Error Handeling, Separate this into a new function
 
-        const accessToken = window.localStorage.getItem(TOKEN_NAME);
-
-        if(accessToken){
-            const res = await fetch(`${API_URL}/watchlist`, {
-                method: "POST",
-                headers:{
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({token: accessToken}),
-            });
-
-            const data = await res.json();
-
-            //Maybe check status and then assign proper data
-
-            setWatchlistData(data);
-        }
+        const token = window.localStorage.getItem(TOKEN_NAME);
         
+        const resData = await postTo('/watchlist', { token }, true, setUser);
+
+        setWatchlistData(resData);
+
     }, []);
 
     const removeFromWatch = async ( { movieId } ) => {
         
-        const response = await fetch(`${API_URL}/watchlist/remove`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                token : window.localStorage.getItem(TOKEN_NAME),
-                movie_id: movieId
-            }),
-        });
-        
-        const removedMoviedata = await response.json();
+        const resData = await postTo('/watchlist/remove', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId});
 
-
-        //TODO separate below statements from above before moving this into watchlist.
-        //TODO generate a message when a movie is removed
-        //TODO close the modal when movie is removed
+        setModalMsg(resData.message);
         
         //Removes the movie from the data stored in state to reflect change without having to reload the page
         setWatchlistData((prevData) => {
@@ -62,7 +37,11 @@ const Watchlist = () => {
 
     return(
         <div className=" w-full pt-12">
-            <MovieGallery data={watchList} modalBtnText={"Remove from Watchlist"} modalBtnClickHandler={removeFromWatch}  />
+            {(Array.isArray(watchList) && watchList.length != 0) ?
+            <MovieGallery data={watchList} modalBtnText={"Remove from Watchlist"} modalBtnClickHandler={removeFromWatch} modalMsgText={modalMsg}  />
+            :
+            <p className="absolute top-[45%] left-1/3 md:left-[45%] font-poppins text-sm xs:text-base text-gray-700">Your watchlist is empty</p>
+            }
         </div>
         
     );

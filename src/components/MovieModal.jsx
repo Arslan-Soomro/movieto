@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { API_URL } from '../utils/global';
+import { getFrom } from "../utils/utils"
+import MsgBox from './MsgBox';
 
 /*
 With the help of api, fetches the data of a specific movie by giving a link
@@ -10,21 +12,19 @@ The Btn Click Handler accepts a param which contains the data about currently op
 from here, keep that in mind if you want to create a function here to use it.   
 */
 
-const MovieModal = ({modalMovData, exitAction, btnClickHandler, btnText}) => {
+const MovieModal = ({modalMovData, exitAction, btnClickHandler, btnText, msgText}) => {
 
     const [modalData, setModalData] = useState(null);
 
-    useEffect(() => {
-        //TODO Divide into separate function into utils
+    useEffect( async () => {
 
-        const fullUrl = `${API_URL}/movie/tmdb?link=${modalMovData.url}`;
-        fetch(fullUrl)
-         .then(res => res.json())
-         .then(data => {
-             data.launch_date = modalMovData.launch_date;
-             data.movieId = modalMovData.id;
-             setModalData(data);
-          });
+        const resData = await getFrom(`/movie/tmdb?link=${modalMovData.url}`);
+        //add additional data that is used but server doesn't send
+        resData.launch_date = modalMovData.launch_date;
+        resData.movieId = modalMovData.id;
+        
+        setModalData(resData);
+
     }, [])
 
     if(!modalData){
@@ -49,6 +49,7 @@ const MovieModal = ({modalMovData, exitAction, btnClickHandler, btnText}) => {
                         <p className="text-gray-400 text-sm xs:text-base">{modalData.genre}</p>
                         <p className="text-gray-400 text-sm xs:text-base">{modalData.launch_date}</p>
                         <button onClick={() => btnClickHandler(modalData)} className="p-2 mt-2 border cursor-pointer text-sm xs:text-base border-purple-600 rounded text-purple-700 hover:bg-purple-600 hover:text-white active:bg-purple-700">{btnText}</button>
+                        <MsgBox>{msgText}</MsgBox>
                     </div>
                 </div>
             </div>

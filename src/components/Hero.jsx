@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "./Navbar";
-import { API_URL } from '../utils/global';
+import { getFrom } from "../utils/utils";
 import { cutToLength } from '../utils/utils';
 
 let Hero = () => {
@@ -8,9 +7,10 @@ let Hero = () => {
   const [movieSpecs, setMovieSpecs] = useState({});
  
   useEffect( async () => {
-      let response = await fetch(`${API_URL}/movie`); 
-      let movie = await response.json();
-      setMovieSpecs(movie);
+
+    const movie = await getFrom('/movie');
+    setMovieSpecs(movie);
+
   }, []);
 
   return (

@@ -13,18 +13,13 @@ import Watchlist from './components/Watchlist';
 
 function App() {
 
-  //TODO add another context, that displays a message above everything that conforms to what the user has done
-  //For example when a user adds movie to watchlist a message should display for some time that the movie has been added to watchlist
-
-  //TODO The State is updated after reloading the page, fix this delay
+  //For example when a user adds or removes movie to watchlist a message should display for some time that the movie has been added to watchlist
 
   //ARCHITECTURE CHANGE, whenever making a request we will access the token stored in the storage and use context for setting the status and not for getting the token because the delay in the token makes it not accessible from context, incase the token is not verified log user out
 
-  const [user, setUser] = useState({token: null, isLogged: false});
+  //TODO create an account page, which contains information about user, a way to update it and then logout button 
 
-  //TODO create a timeInterval that checks after certain time for token, and then updates user using setState
-  //This way removing the token will log the user out and storing the right token will log the user in automatically
-  //One Problem with this approach is that operations will delay with respect to time the interval takes to run
+  const [user, setUser] = useState({token: null, isLogged: false});
 
   useEffect(async () => {
     const accessToken = window.localStorage.getItem(TOKEN_NAME);
@@ -45,7 +40,7 @@ function App() {
     }
     */
 
-  }, [])
+  }, []);
 
   return (
   <UserContext.Provider value={{user, setUser}}>

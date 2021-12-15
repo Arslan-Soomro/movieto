@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../utils/contexts";
 import { Link } from 'react-router-dom';
 import LightBGButton from './LightBGButton';
@@ -13,8 +13,7 @@ const Navbar = () => {
   const logoutUser = () => {
     removeToken();
     setUser({token: null, isLogged: false});
-    //TODO Redirect To Homepage
-    //navigate('/home');
+    navigate('/home');
   }
 
   return (
