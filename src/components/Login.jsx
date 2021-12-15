@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { loginUser } from "../utils/utils";
 import { TOKEN_NAME } from "../utils/global";
 import { useNavigate } from "react-router-dom";
 import MsgBox from "./MsgBox";
+import { UserContext } from "../utils/contexts";
 
 let Login = (props) => {
 
   //TODO create a global token state, that changes thing when updated, probably at app
+  const { user, setUser } = useContext(UserContext);
+
   const usernameRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
@@ -14,12 +17,14 @@ let Login = (props) => {
   const [ validationMsg, setValidationMsg ] = useState(null);
 
   const loginClickHandler = async () => {
-    //TODO incase we don't get a token, display the returned message
-            
+    
+    //TODO move this function into utils
+
     const response = await loginUser(usernameRef.current.value, passwordRef.current.value);
     console.log(response);
     if(response.data){
       window.localStorage.setItem(TOKEN_NAME, response.data.token);
+      setUser({token: response.data.token, isLogged: true});
       navigate('/');
     }else{
       setValidationMsg(response.message);

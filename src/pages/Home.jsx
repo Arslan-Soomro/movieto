@@ -17,7 +17,7 @@ let Home = () => {
     return(
         <section className="h-full">
             <Hero />
-                <MovieGalleryFetch />
+            <MovieGalleryFetch />
             <Footer />
         </section>
     )

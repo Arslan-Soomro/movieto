@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import MovieCard from "./MovieCard";
-import PageBarOld from "./PageBarOld";
 import PageBar from "./PageBar";
 import MovieModal from "./MovieModal";
 
@@ -10,34 +9,38 @@ Other variables manage what part of data is to be displayed and how.
 */
 
 
-const MovieGallery = ({data, setCurPage, totalPages}) => {
+const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClickHandler}) => {
 
     const [movieModalData, setMovieModalData] = useState(null);//Provide a link to fetch (specific) movie contents and null to fetch no movies, if no movies than modal is hidden
     const mContainerRef = useRef();//Ref To Help Scroll To Top
 
-    /*
-    //For Debugging Purposes
-    useEffect(() => {
-        console.log(movieModalData);
-    }, [movieModalData]);
-    */
-
     useEffect(() => {   
         //To Scroll To Top
         mContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+
+        //Incase the given data is not array we default data to an empty array, to stop getting errors like .map is not a function, which is a specific function of array
+        if(!Array.isArray(data)){
+            data = [];
+        }
+
     }, [data]);
 
     return (
         <section className="py-4 px-2" ref={mContainerRef}>
-            {movieModalData ? <MovieModal exitAction={() => setMovieModalData(null)} modalLink={movieModalData} /> : null}
+            {/* Shows A Specific Movie's Data if Data is Available */}
+            {movieModalData ? <MovieModal exitAction={() => setMovieModalData(null)} modalMovData={movieModalData} btnText={modalBtnText} btnClickHandler={modalBtnClickHandler} /> : null}
             
+            {/* Maps Available Movies to Movie Cards and then shows them collectively */}
             <div className="container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-items-center gap-3 p-1 xs:p-4">
-                {data ? data.map((rawData, i) => <MovieCard key={i} movieTitle={rawData.name} imgSrc={rawData.img_url} clickHandler={() => setMovieModalData(rawData.url)} />) : <div className="spinner absolute bottom-0"></div> }
+                {data ? data.map((rawData, i) => <MovieCard key={i} movieId={rawData.id} movieTitle={rawData.name} imgSrc={rawData.img_url} clickHandler={() => setMovieModalData(rawData)} />) : <div className="spinner absolute bottom-1/2"></div> /* Play around spinner so it fits perfectly on both home and wishlist */ }
             </div>
-      
-            <PageBar setCurPage={setCurPage} totalPages={totalPages}/>
-        </section>
 
+            {/* If there are too many movies, we use PageBar component to divide movies upon different pages */}
+            {totalPages ? (totalPages > 1 ?
+            <PageBar setCurPage={setCurPage} totalPages={totalPages}/> : null) 
+            : null}
+
+        </section>
     )
     
 }

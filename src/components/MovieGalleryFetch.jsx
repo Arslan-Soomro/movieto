@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { UserContext } from "../utils/contexts";
 import MovieGallery from "./MovieGallery";
 import { API_URL } from '../utils/global';
 
@@ -8,6 +9,8 @@ const MovieGalleryFecth = () => {
 
     const [curPage, setCurPage] = useState(1); //Current Page to fetch data according to page
     const [movieData, setMovieData] = useState({}); //Movie data according to the page is stored here
+
+    const { user, setUser } = useContext(UserContext);
 
     //To Initialize the application with movie data, count and total pages
     useEffect(async () => {
@@ -32,7 +35,27 @@ const MovieGalleryFecth = () => {
 
     }, [curPage]);
 
-    return <MovieGallery data={movieData.data} setCurPage={setCurPage} totalPages={movieData.totalPages} />
+
+    //TODO Name the whole data something and then split it, Add some mechanisim to catch any errors
+    //TODO move this function into utils
+    //TODO if user is not logged in, log the user in first
+    const addToWatch = async ({ movieId }) => {
+
+        const response = await fetch(`${API_URL}/watchlist/add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                token : user.token,
+                movie_id: movieId
+            }),
+        });
+        const data = await response.json();
+        //console.log(data);
+    }
+
+    return <MovieGallery data={movieData.data} setCurPage={setCurPage} totalPages={movieData.totalPages} modalBtnText="Add to Watchlist" modalBtnClickHandler={addToWatch} />
 };
 
 export default MovieGalleryFecth;

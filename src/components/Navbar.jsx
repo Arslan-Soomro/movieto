@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const logoutUser = () => {
     removeToken();
-    setUser( {token: null, isLogged: false} );
+    setUser({token: null, isLogged: false});
     //TODO Redirect To Homepage
     //navigate('/home');
   }
@@ -28,8 +28,8 @@ const Navbar = () => {
         <div className="text-purple-600 text-sm xs:text-base">
           { user.isLogged ?
           <React.Fragment>
-            <LightBGButton text='Wishlist' goto='#' clickHandler={(() => console.log(user))} />
-            <LightBGButton text='Settings' goto="#" clickHandler={logoutUser} />
+            <LightBGButton text='Watchlist' goto='/watchlist' clickHandler={(() => console.log(user))} />
+            <LightBGButton text='Account' goto="#" clickHandler={logoutUser} />
           </React.Fragment>
           :
           <React.Fragment>
