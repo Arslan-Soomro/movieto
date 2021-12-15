@@ -1,31 +1,47 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/global";
 import MsgBox from "./MsgBox";
 
 let Signup = () => {
 
   const [validationMsg, setValidationMsg] = useState("");
+  const navigate = useNavigate();
 
-  //TODO add refs and get input from signup form
+  const usernameRef = useRef();
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passRef = useRef();
+  const confirmPassRef = useRef();
 
-  const signupUser = async (e) => {
-    e.preventDefault();
-    const response = await fetch(`${API_URL}/user/signup`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({})
-    });
-
-    const signupUserdata = await response.json();
-
-    if(response.status == 400){
-      setValidationMsg(signupUserdata.message);
-    }
-
+  const signupUser = async (userDataforSignup) => {
     
-    console.log(data);
+    //TODO separate this function into utils
+
+    //A Basic validation for confirm password because server doesn't check for confirm passwrod field
+    if(userDataforSignup.confirmPass && userDataforSignup.password){
+      if(userDataforSignup.confirmPass === userDataforSignup.password){
+        const response = await fetch(`${API_URL}/user/signup`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+            body: JSON.stringify(userDataforSignup)
+          });
+
+          const signupUserdata = await response.json();
+
+        setValidationMsg(signupUserdata.message);
+        if(response.status == 201){
+          navigate("/login");
+        }
+
+      }else{
+        setValidationMsg("First password does not match the second password");
+      } 
+    }else{
+      setValidationMsg("One of the entries is missing");
+    }
   };
 
   return (
@@ -38,30 +54,35 @@ let Signup = () => {
         name="fullname"
         placeholder="Name"
         className="purp_input"
+        ref={nameRef}
       />
       <input
         type="text"
         name="username"
         placeholder="Username"
         className="purp_input"
+        ref={usernameRef}
       />
       <input
         type="text"
         name="email"
         placeholder="Email"
         className="purp_input"
+        ref={emailRef}
       />
       <input
         type="password"
         name="password"
         placeholder="password"
         className="purp_input"
+        ref={passRef}
       />
       <input
         type="password"
         name="confirm-password"
         placeholder="confirm password"
         className="purp_input"
+        ref={confirmPassRef}
       />
       <div className="flex justify-between">
         <button
@@ -73,7 +94,7 @@ let Signup = () => {
         <button
           type="submit"
           className="purp_outline_btn"
-          onClick={signupUser}
+          onClick={(e) => {e.preventDefault(); signupUser({user_name: usernameRef.current.value, full_name: nameRef.current.value, email: emailRef.current.value, password: passRef.current.value, confirmPass: confirmPassRef.current.value})}}
         >
           Signup
         </button>
