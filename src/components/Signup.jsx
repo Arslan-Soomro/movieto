@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
+import { UserContext } from "../utils/contexts";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../utils/global";
 import { postTo } from "../utils/utils";
 import MsgBox from "./MsgBox";
 
 let Signup = () => {
 
+  const { user, setUser} = useContext(UserContext);
   const [validationMsg, setValidationMsg] = useState("");
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ let Signup = () => {
     if(userDataforSignup.confirmPass && userDataforSignup.password){
       if(userDataforSignup.confirmPass === userDataforSignup.password){
 
-        const signupUserData = await postTo('/user/signup', userDataforSignup, true);
+        const signupUserData = await postTo('/user/signup', userDataforSignup, true, setUser);
 
         setValidationMsg(signupUserData.message);
         if(signupUserData.status == 201){

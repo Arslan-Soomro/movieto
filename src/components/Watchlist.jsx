@@ -24,7 +24,7 @@ const Watchlist = () => {
 
     const removeFromWatch = async ( { movieId } ) => {
         
-        const resData = await postTo('/watchlist/remove', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId});
+        const resData = await postTo('/watchlist/remove', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, false, setUser);
 
         setModalMsg(resData.message);
         

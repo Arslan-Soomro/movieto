@@ -6,7 +6,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { UserContext } from './utils/contexts';
-import { TOKEN_NAME } from './utils/global';
+import { TOKEN_NAME, INVALID_TOKEN_SIGN } from './utils/global';
 import { isValidToken } from './utils/utils';
 import Watchlist from './components/Watchlist';
 
@@ -20,6 +20,7 @@ function App() {
   //TODO create an account page, which contains information about user, a way to update it and then logout button 
 
   const [user, setUser] = useState({token: null, isLogged: false});
+  const navigate = useNavigate();
 
   useEffect(async () => {
     const accessToken = window.localStorage.getItem(TOKEN_NAME);
@@ -28,19 +29,24 @@ function App() {
     //ARCHITECTURE CHANGE if the token is present in the local storage, we show the account
     //once we start making request based on that token, we will get to know if token is valid or not
     //if token is not valid we simply remove it from the storage and log the user out
-    //TODO log the user out whenever we get a 401 response from server
 
     if(accessToken){
       setUser({token: accessToken, isLogged: true});
+      if(await !isValidToken(accessToken)){
+        setUser({token: accessToken, isLogged: true});
+      }
     }
-
-    /*
-    if(await isValidToken(accessToken)){
-      setUser({token: accessToken, isLogged: true});
-    }
-    */
 
   }, []);
+
+  useEffect(async () => {
+    const accessToken = window.localStorage.getItem(TOKEN_NAME);
+
+    if(!accessToken){
+      navigate('/');
+    }
+
+  }, [user]);
 
   return (
   <UserContext.Provider value={{user, setUser}}>

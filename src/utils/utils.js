@@ -1,5 +1,4 @@
-import { API_URL, TOKEN_NAME } from "./global";
-import { useNavigate } from "react-router-dom";
+import { API_URL, TOKEN_NAME, INVALID_TOKEN_SIGN } from "./global";
 
 export const cutToLength = (str, len) => {
     if(str.length > len){
@@ -64,7 +63,6 @@ export const postTo = async (url, reqBody, returnStatus = false, userStateSetter
         if(reqBody.token && userStateSetter && resStatus == 401){
             removeToken();
             userStateSetter({token: null, isLogged: false});
-            const navigate = useNavigate();
             return {};
         }
 

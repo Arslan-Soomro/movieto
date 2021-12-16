@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import { UserContext } from "../utils/contexts";
 import MovieGallery from "./MovieGallery";
-import { API_URL, TOKEN_NAME } from '../utils/global';
+import { TOKEN_NAME } from '../utils/global';
 import { getFrom, postTo } from "../utils/utils";
 
 
@@ -12,7 +12,7 @@ const MovieGalleryFecth = () => {
     const [movieData, setMovieData] = useState({}); //Movie data according to the page is stored here
     const [modalMsg, setModalMsg] = useState("");
 
-    //const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     //To Initialize the application with movie data, count and total pages
     useEffect(async () => {
@@ -37,7 +37,7 @@ const MovieGalleryFecth = () => {
 
     const addToWatch = async ({ movieId }) => {
 
-        const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId});
+        const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, false, setUser);
         setModalMsg(resData.message);
     
     }
