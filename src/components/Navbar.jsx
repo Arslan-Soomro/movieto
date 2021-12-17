@@ -27,8 +27,8 @@ const Navbar = () => {
         <div className="text-purple-600 text-sm xs:text-base">
           { user.isLogged ?
           <React.Fragment>
-            <LightBGButton text='Watchlist' goto='/watchlist' clickHandler={(() => console.log(user))} />
-            <LightBGButton text='Account' goto="#" clickHandler={logoutUser} />
+            <LightBGButton text='Watchlist' goto='/watchlist' />
+            <LightBGButton text='Account' goto="/account" clickHandler={undefined && logoutUser} />
           </React.Fragment>
           :
           <React.Fragment>

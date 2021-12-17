@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import MovieGallery from "./MovieGallery";
+import MovieGallery from "../components/MovieGallery";
 import { UserContext } from "../utils/contexts";
 import { API_URL, TOKEN_NAME } from "../utils/global";
 import { postTo } from "../utils/utils";

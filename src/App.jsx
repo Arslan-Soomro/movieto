@@ -8,7 +8,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { UserContext } from './utils/contexts';
 import { TOKEN_NAME, INVALID_TOKEN_SIGN } from './utils/global';
 import { isValidToken } from './utils/utils';
-import Watchlist from './components/Watchlist';
+import Watchlist from './pages/Watchlist';
+import Account from "./pages/Account";
 
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
 
   }, []);
 
+  /*
+  This hook is used to get the user back to home page when logged out automatically, but creates problem when token user is not logged in, it doesn't let users surf other routes,
+  Try setting if (accessToken == INVALID_TOKEN_SIGN) then navigate('/')
   useEffect(async () => {
     const accessToken = window.localStorage.getItem(TOKEN_NAME);
 
@@ -47,6 +51,7 @@ function App() {
     }
 
   }, [user]);
+  */
 
   return (
   <UserContext.Provider value={{user, setUser}}>
@@ -57,6 +62,7 @@ function App() {
           <Route path="/signup" element={<RTemplate><Signup /></RTemplate>} />
           <Route path="/login" exact element={<RTemplate><Login /></RTemplate>} />
           <Route path="/watchlist" exact element={<Watchlist />} />
+          <Route path="/account" exact element={<Account />} />
       </Routes>
     </div>
   </UserContext.Provider>

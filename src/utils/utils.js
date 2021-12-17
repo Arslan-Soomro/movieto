@@ -43,7 +43,7 @@ export const isValidToken = async (token) => {
 export const postTo = async (url, reqBody, returnStatus = false, userStateSetter) => {
 
     try{
-        console.log(reqBody);
+        //console.log(reqBody);
         const res = await fetch(`${API_URL}${url}`, {
             method: "POST",
             headers:{
