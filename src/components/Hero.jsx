@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../utils/contexts";
 import { getFrom } from "../utils/utils";
 import { cutToLength } from '../utils/utils';
+
+
+//TODO if user is not logged in and performs an action that requires login then bring user to login page
 
 let Hero = () => {
 
   const [movieSpecs, setMovieSpecs] = useState({});
+  const { user, setUser } = useContext(UserContext);
  
   useEffect( async () => {
 
@@ -12,6 +17,13 @@ let Hero = () => {
     setMovieSpecs(movie);
 
   }, []);
+
+  const addToWatch = async ({ movieId }) => {
+
+    const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, false, setUser);
+    setModalMsg(resData.message);
+  
+  }
 
   return (
     <section className="container relative p-4 h-full">

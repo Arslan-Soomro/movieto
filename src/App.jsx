@@ -40,18 +40,9 @@ function App() {
 
   }, []);
 
-  /*
-  This hook is used to get the user back to home page when logged out automatically, but creates problem when token user is not logged in, it doesn't let users surf other routes,
-  Try setting if (accessToken == INVALID_TOKEN_SIGN) then navigate('/')
-  useEffect(async () => {
-    const accessToken = window.localStorage.getItem(TOKEN_NAME);
+  //TODO some routes should only be availabel when user is logged in
 
-    if(!accessToken){
-      navigate('/');
-    }
-
-  }, [user]);
-  */
+  //TODO Configure and upload on vercel and git
 
   return (
   <UserContext.Provider value={{user, setUser}}>

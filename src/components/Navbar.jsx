@@ -8,13 +8,6 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
 
   const { user, setUser } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  const logoutUser = () => {
-    removeToken();
-    setUser({token: null, isLogged: false});
-    navigate('/home');
-  }
 
   return (
     <div className="absolute z-10 top-2 xs:top-4 w-full">
@@ -28,7 +21,7 @@ const Navbar = () => {
           { user.isLogged ?
           <React.Fragment>
             <LightBGButton text='Watchlist' goto='/watchlist' />
-            <LightBGButton text='Account' goto="/account" clickHandler={undefined && logoutUser} />
+            <LightBGButton text='Account' goto="/account" />
           </React.Fragment>
           :
           <React.Fragment>

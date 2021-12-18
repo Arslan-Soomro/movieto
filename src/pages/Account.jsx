@@ -71,7 +71,13 @@ const Account = () => {
       console.log(email + " " + userData.email);
     }
 
-    //TODO setValidationMsg only if no fields are edited
+    const navigate = useNavigate();
+  
+    const logoutUser = () => {
+      removeToken();
+      setUser({token: null, isLogged: false});
+      navigate('/home');
+    }
 
     const resData = await postTo("/user/update", dataToSend, false, setUser);
     
@@ -93,7 +99,7 @@ const Account = () => {
         {/* can't show password <InputWithTitle title="Password" holder="Enter New Password" inputRef={passRef} />*/}
         <MsgBox>{validationMsg}</MsgBox>
         <div className="flex justify-between px-2">
-          <button className="purp_outline_btn">Logout</button>
+          <button className="purp_outline_btn" onClick={logoutUser}>Logout</button>
           <button
             className="purp_outline_btn"
             onClick={() => updateClickHandler({ user_name: usernameRef.current.value, full_name: nameRef.current.value, email: emailRef.current.value })}
