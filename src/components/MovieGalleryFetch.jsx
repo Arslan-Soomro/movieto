@@ -3,6 +3,7 @@ import { UserContext } from "../utils/contexts";
 import MovieGallery from "./MovieGallery";
 import { TOKEN_NAME } from '../utils/global';
 import { getFrom, postTo } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 
 //Responsible for fetching appropriate data
@@ -13,6 +14,7 @@ const MovieGalleryFecth = () => {
     const [modalMsg, setModalMsg] = useState("");
 
     const { user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     //To Initialize the application with movie data, count and total pages
     useEffect(async () => {
@@ -37,7 +39,14 @@ const MovieGalleryFecth = () => {
 
     const addToWatch = async ({ movieId }) => {
 
-        const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, false, setUser);
+        console.log("Waht");
+        
+        const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, true, setUser);
+
+        if(!user.isLogged){
+            navigate('/login');
+        }
+
         setModalMsg(resData.message);
     
     }

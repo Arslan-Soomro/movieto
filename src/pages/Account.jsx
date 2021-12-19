@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputWithTitle from "../components/InputWithTitle";
 import MsgBox from "../components/MsgBox";
 import { UserContext } from "../utils/contexts";
@@ -58,25 +59,17 @@ const Account = () => {
 
     if (user_name != userData.user_name) {
       dataToSend.user_name = user_name;
-      console.log(user_name + " " + userData.user_name);
+      //console.log(user_name + " " + userData.user_name);
     }
 
     if (full_name != userData.full_name) {
       dataToSend.full_name = full_name;
-      console.log(full_name + " " + userData.full_name);
+      //console.log(full_name + " " + userData.full_name);
     }
 
     if (email != userData.email) {
       dataToSend.email = email;
-      console.log(email + " " + userData.email);
-    }
-
-    const navigate = useNavigate();
-  
-    const logoutUser = () => {
-      removeToken();
-      setUser({token: null, isLogged: false});
-      navigate('/home');
+      //console.log(email + " " + userData.email);
     }
 
     const resData = await postTo("/user/update", dataToSend, false, setUser);
@@ -86,6 +79,14 @@ const Account = () => {
     );
 
   };
+
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    removeToken();
+    setUser({token: null, isLogged: false});
+    navigate('/home');
+  }
 
   return (
     <section className="w-full h-full flex justify-center items-center">

@@ -38,12 +38,12 @@ const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClick
             
             {/* Maps Available Movies to Movie Cards and then shows them collectively */}
             <div className="container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-items-center gap-3 p-1 xs:p-4">
-                {data ? data.map((rawData, i) => <MovieCard key={i} movieId={rawData.id} movieTitle={rawData.name} imgSrc={rawData.img_url} clickHandler={() => setMovieModalData(rawData)} />) : <div className="spinner absolute bottom-0"></div> /* Play around spinner so it fits perfectly on both home and wishlist */ }
+                {data ? data.map((rawData, i) => <MovieCard key={i} iconClickHandler={modalBtnClickHandler} rawData={rawData} clickHandler={() => setMovieModalData(rawData)} />) : <div className="spinner absolute bottom-0"></div> /* Play around spinner so it fits perfectly on both home and wishlist */ }
             </div>
 
             {/* If there are too many movies, we use PageBar component to divide movies upon different pages */}
             {totalPages ? (totalPages > 1 ?
-            <PageBar setCurPage={setCurPage} totalPages={totalPages}/> : null) 
+            <PageBar setCurPage={setCurPage} totalPages={totalPages} /> : null) 
             : null}
 
         </section>

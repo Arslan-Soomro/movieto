@@ -15,12 +15,16 @@ from here, keep that in mind if you want to create a function here to use it.
 const MovieModal = ({modalMovData, exitAction, btnClickHandler, btnText, msgText}) => {
 
     const [modalData, setModalData] = useState(null);
-
+    
     useEffect( async () => {
 
         const resData = await getFrom(`/movie/tmdb?link=${modalMovData.url}`);
         //add additional data that is used but server doesn't send
         resData.launch_date = modalMovData.launch_date;
+        resData.movieId = modalMovData.id;
+        resData.rating = modalMovData.rating;
+        resData.img_url = modalMovData.img_url;
+        resData.name = modalMovData.name;
         resData.movieId = modalMovData.id;
         
         setModalData(resData);
