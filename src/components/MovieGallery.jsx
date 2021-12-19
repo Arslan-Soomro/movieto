@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import MovieCard from "./MovieCard";
 import PageBar from "./PageBar";
 import MovieModal from "./MovieModal";
+import { render } from "react-dom";
 
 /*
 Given some movie data, MovieGallery translates that data onto movieCards.
@@ -16,17 +17,27 @@ const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClick
     const [movieModalData, setMovieModalData] = useState(null);//Provide a link to fetch (specific) movie contents and null to fetch no movies, if no movies than modal is hidden
     const mContainerRef = useRef();//Ref To Help Scroll To Top
 
+    const updateCount = useRef(0);
+
     //TODO setup something so that the page doesn't go down on start, may be setup intersection with movie gallery, so only when movie gallery is visible this function is gonna work
 
 
     useEffect(() => {   
         //To Scroll To Top
 
-        mContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+        //This stops from websiite scrolling down when it initilay loads
+        if(updateCount.current > 1){
+            mContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        
 
         //Incase the given data is not array we default data to an empty array, to stop getting errors like .map is not a function, which is a specific function of array
         if(!Array.isArray(data)){
             data = [];
+        }else{
+            
+            updateCount.current += 1;
         }
 
     }, [data]);
