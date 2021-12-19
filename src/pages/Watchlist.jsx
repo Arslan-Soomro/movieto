@@ -38,7 +38,7 @@ const Watchlist = () => {
     return(
         <div className=" w-full pt-12">
             {(Array.isArray(watchList) && watchList.length != 0) ?
-            <MovieGallery data={watchList} modalBtnText={"Remove from Watchlist"} modalBtnClickHandler={removeFromWatch} modalMsgText={modalMsg}  />
+            <MovieGallery data={watchList} modalBtnText={"Remove from Watchlist"} modalBtnClickHandler={removeFromWatch} modalMsgText={modalMsg} iconType="red" iconSrc="images/remove-icon.svg"  />
             :
             <p className="absolute top-[45%] left-1/3 md:left-[45%] font-poppins text-sm xs:text-base text-gray-700">Your watchlist is empty</p>
             }

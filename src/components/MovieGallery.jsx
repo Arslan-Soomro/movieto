@@ -9,7 +9,7 @@ Other variables manage what part of data is to be displayed and how.
 */
 
 
-const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClickHandler, modalMsgText}) => {
+const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClickHandler, modalMsgText, iconType, iconSrc}) => {
 
     //TODO set the img src attribute of a movie card to some default background to avoid showing previous movie posters till new ones load
 
@@ -38,7 +38,7 @@ const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClick
             
             {/* Maps Available Movies to Movie Cards and then shows them collectively */}
             <div className="container grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-items-center gap-3 p-1 xs:p-4">
-                {data ? data.map((rawData, i) => <MovieCard key={i} iconClickHandler={modalBtnClickHandler} rawData={rawData} clickHandler={() => setMovieModalData(rawData)} />) : <div className="spinner absolute bottom-0"></div> /* Play around spinner so it fits perfectly on both home and wishlist */ }
+                {data ? data.map((rawData, i) => <MovieCard key={i} iconClickHandler={modalBtnClickHandler} iconSrc={iconSrc} iconType={iconType} rawData={rawData} clickHandler={() => setMovieModalData(rawData)} />) : <div className="spinner absolute bottom-0"></div> /* Play around spinner so it fits perfectly on both home and wishlist */ }
             </div>
 
             {/* If there are too many movies, we use PageBar component to divide movies upon different pages */}

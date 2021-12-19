@@ -38,8 +38,6 @@ const MovieGalleryFecth = () => {
 
 
     const addToWatch = async ({ movieId }) => {
-
-        console.log("Waht");
         
         const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, true, setUser);
 
@@ -51,7 +49,7 @@ const MovieGalleryFecth = () => {
     
     }
 
-    return <MovieGallery data={movieData.data} setCurPage={setCurPage} totalPages={movieData.totalPages} modalBtnText="Add to Watchlist" modalMsgText={modalMsg} modalBtnClickHandler={addToWatch} />
+    return <MovieGallery data={movieData.data} setCurPage={setCurPage} totalPages={movieData.totalPages} modalBtnText="Add to Watchlist" modalMsgText={modalMsg} modalBtnClickHandler={addToWatch} iconType="green" iconSrc="images/add-icon.svg" />
 };
 
 export default MovieGalleryFecth;

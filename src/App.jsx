@@ -44,18 +44,11 @@ function App() {
       <Navbar />
       <Routes>
           <Route path="/" exact element={<Home />} />
-          {/* Watchlist and account routes only available when user is logged in otherwise login and signup are available */}
-          {user.isLogged ? 
-          <>
+          {/*TODO Watchlist and account routes only available when user is logged in otherwise login and signup are available */}
           <Route path="/watchlist" exact element={<Watchlist />} />
           <Route path="/account" exact element={<Account />} />
-          </>
-          :
-          <>
           <Route path="/signup" element={<RTemplate><Signup /></RTemplate>} />
           <Route path="/login" exact element={<RTemplate><Login /></RTemplate>} />
-          </>
-          }
       </Routes>
     </div>
   </UserContext.Provider>
