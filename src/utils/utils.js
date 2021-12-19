@@ -9,15 +9,8 @@ export const cutToLength = (str, len) => {
 
 export const loginUser = async (username, pass) => {
     if(username.length > 0 && pass.length > 0){
-        const res = await fetch("http://localhost:5000/user/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({user_name: username, password: pass})
-          });
-        const data = await res.json();
-        return data;
+        const res = await postTo('/user/login', {user_name: username, password: pass});
+        return res;
     }
     return {message: 'Username or password is empty'};
 }

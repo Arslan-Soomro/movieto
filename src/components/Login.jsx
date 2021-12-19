@@ -17,6 +17,7 @@ let Login = (props) => {
 
   const loginClickHandler = async () => {
     try{
+      
       const response = await loginUser(usernameRef.current.value, passwordRef.current.value);
 
       if(response.data){
@@ -30,6 +31,7 @@ let Login = (props) => {
       }
     }catch(err){
       console.log("Error@LoginClickHandler: " + err.message);
+      console.error(err);
     }
 
   }
