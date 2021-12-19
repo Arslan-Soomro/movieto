@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../utils/contexts";
-import { getFrom } from "../utils/utils";
-import { cutToLength } from '../utils/utils';
+import { getFrom, cutToLength, postTo } from "../utils/utils";
+import { TOKEN_NAME } from "../utils/global";
 
 
 //TODO if user is not logged in and performs an action that requires login then bring user to login page
@@ -10,6 +11,7 @@ let Hero = () => {
 
   const [movieSpecs, setMovieSpecs] = useState({});
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
  
   useEffect( async () => {
 
@@ -19,10 +21,13 @@ let Hero = () => {
   }, []);
 
   const addToWatch = async ({ movieId }) => {
+        
+    const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, true, setUser);
 
-    const resData = await postTo('/watchlist/add', { token: window.localStorage.getItem(TOKEN_NAME), movie_id: movieId}, false, setUser);
-    setModalMsg(resData.message);
-  
+    if(!user.isLogged){
+        navigate('/login');
+    }
+
   }
 
   return (
@@ -51,8 +56,8 @@ let Hero = () => {
             src={movieSpecs.img_url || 'images/hero-img-load.jpg'}
             alt=""
           />
-          <button className="round_btn text-white bg-purple-600">
-            Read More
+          <button className="round_btn text-white bg-purple-600" onClick={() => addToWatch({movieId: movieSpecs.id})}>
+            Add to Watchlist
           </button>
         </div>
       </div>
