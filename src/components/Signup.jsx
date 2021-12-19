@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../utils/contexts";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postTo } from "../utils/utils";
 import MsgBox from "./MsgBox";
 
@@ -99,7 +99,7 @@ let Signup = () => {
       }
       <p className="text-sm xs:text-base text-gray-700 mt-2">
         Already have an account !{" "}
-        <a className="text-purple-600 font-bold cursor-pointer">Login</a>
+        <Link to="/login" className="text-purple-600 font-bold cursor-pointer">Login</Link>
       </p>
     </form>
   );

@@ -36,7 +36,6 @@ const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClick
         if(!Array.isArray(data)){
             data = [];
         }else{
-            
             updateCount.current += 1;
         }
 

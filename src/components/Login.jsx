@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { loginUser } from "../utils/utils";
 import { TOKEN_NAME } from "../utils/global";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MsgBox from "./MsgBox";
 import { UserContext } from "../utils/contexts";
 
@@ -72,7 +72,7 @@ let Login = (props) => {
 
       <p className="text-sm xs:text-base text-gray-700 mt-2">
         Don't have an account !{" "}
-        <a className="text-purple-600 font-bold cursor-pointer">Signup</a>
+        <Link to="/signup" className="text-purple-600 font-bold cursor-pointer">Signup</Link>
       </p>
     </form>
   );
