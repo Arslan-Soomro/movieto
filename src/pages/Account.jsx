@@ -80,7 +80,7 @@ const Account = () => {
   const logoutUser = () => {
     removeToken();
     setUser({token: null, isLogged: false});
-    navigate('/ ');
+    navigate('/');
   }
 
   return (

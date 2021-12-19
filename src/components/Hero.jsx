@@ -43,9 +43,11 @@ let Hero = () => {
             or if you are confused watch one of our choosen here.
           </p>
           {/*TODO add functionality for this button */}
+          <a href="#movies-cont">
           <button className="round_btn text-white bg-purple-600">
             Find Movie
           </button>
+          </a>
         </div>
         <div className="flex flex-col items-center sm:w-1/2 lg:w-2/5">
           <p className="text-gray-400 sm:text-lg">You may like</p>

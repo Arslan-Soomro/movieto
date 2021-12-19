@@ -32,7 +32,7 @@ const MovieGallery = ({data, setCurPage, totalPages, modalBtnText, modalBtnClick
     }, [data]);
 
     return (
-        <section className="py-4 px-2" ref={mContainerRef}>
+        <section id="movies-cont" className="py-4 px-2" ref={mContainerRef}>
             {/* Shows A Specific Movie's Data if Data is Available */}
             {movieModalData ? <MovieModal exitAction={() => setMovieModalData(null)} modalMovData={movieModalData} btnText={modalBtnText} btnClickHandler={modalBtnClickHandler} msgText={modalMsgText} /> : null}
             
