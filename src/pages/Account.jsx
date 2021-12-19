@@ -4,12 +4,7 @@ import InputWithTitle from "../components/InputWithTitle";
 import MsgBox from "../components/MsgBox";
 import { UserContext } from "../utils/contexts";
 import { TOKEN_NAME } from "../utils/global";
-import { postTo } from "../utils/utils";
-
-//TODO Integrate with API
-//TODO Fill Default Values with user data
-//TODO Clicking on update should validate and update user data and dispaly a returned message
-//TODO Clicking on logout should log the user out (a function is already built for it use it there)
+import { postTo, removeToken } from "../utils/utils";
 
 const Account = () => {
   const { user, setUser } = useContext(UserContext);
@@ -85,7 +80,7 @@ const Account = () => {
   const logoutUser = () => {
     removeToken();
     setUser({token: null, isLogged: false});
-    navigate('/home');
+    navigate('/ ');
   }
 
   return (

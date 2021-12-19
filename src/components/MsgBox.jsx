@@ -13,7 +13,7 @@ const MsgBox = ({children, type}) => {
     }
 
     return(
-    <p className={`${blockColor} text-center py-2 px-1 text-gray-800 rounded text-xs xs:text-sm md:text-base max-w-[fit-content]`} >
+    <p className={`${blockColor} text-center mx-auto my-0 py-2 px-1 text-gray-800 rounded text-xs xs:text-sm md:text-base max-w-[fit-content]`} >
         {children}
     </p>
     )

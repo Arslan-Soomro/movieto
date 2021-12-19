@@ -39,9 +39,10 @@ let Hero = () => {
             Perfect Movie
           </h1>
           <p className="hidden sm:block text-gray-500 lg:text-xl mb-4 max-w-xl sm:text-lg">
-            Help us find you the perfect movie to watch you don't have to hustle
-            through tons of movies to watch a good movie.
+            Hustle through tons of movies of every category, giving you a lot of movies to choose from,
+            or if you are confused watch one of our choosen here.
           </p>
+          {/*TODO add functionality for this button */}
           <button className="round_btn text-white bg-purple-600">
             Find Movie
           </button>
