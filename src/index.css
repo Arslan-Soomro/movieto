@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base{
+    /*
     @font-face {
         font-family: Poppins;
         src: url('fonts/Poppins-Regular.ttf');
@@ -14,6 +15,7 @@
         src: url('fonts/Poppins-Bold.ttf');
         font-weight: 700;
     }
+    */
 
     html{
         @apply w-full h-full;
